@@ -1,11 +1,18 @@
-<label>Choose a browser from this list:<input list="browsers" name="myBrowser" /></label>
-<datalist id="browsers">
-      <option value="Chrome">
-      <option value="Firefox">
-      <option value="Internet Explorer">
-      <option value="Opera">
-      <option value="Safari">
-      <option value="Microsoft Edge">
-</datalist>
+<div id="mySelect"></div>
 <script>
+    const div = document.getElementById("mySelect");
+    const datalist = document.createElement("datalist");
+    const input = document.createElement("input");
+    const options = ["Chrome", "Firefox", "Internet Explorer", "Opera", "Safari", "Microsoft Edge"];
+
+    datalist.id = "browsers";
+    for (var i = 0; i < options.length; i++) {
+        const option = document.createElement("option");
+        option.value = options[i];
+        datalist.append(option);
+    }
+    div.append(datalist);
+    input.setAttribute("list", datalist.id);
+    input.setAttribute("name", "toto");
+    div.append(input);
 </script>
