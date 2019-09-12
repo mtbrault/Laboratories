@@ -18,6 +18,7 @@
 
     form.append(datalist);
     input.setAttribute("list", datalist.id);
+    input.placeholder = "Select your browser";
     input.oninput = () => {
         const filteredOptions = options.filter(el => (el.indexOf(input.value) !== -1))
         if (filteredOptions.length === 0) {
