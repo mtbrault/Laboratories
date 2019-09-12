@@ -20,20 +20,26 @@
     input.oninput = () => {
         const filteredOptions = options.filter(el => (el.indexOf(input.value) !== -1))
         if (filteredOptions.length === 0) {
-            text.style.display = ""
+            text.hidden = false
         } else {
-            text.style.display = "none"
+            text.hidden = true
+        }
+        if (input.value === "") {
+            button.hidden = true;
+        } else {
+            button.hidden = false;
         }
     }
     form.append(input)
 
     button.type = "reset";
-    button.onclick = () => text.style.display = "none"
+    button.hidden = true;
+    button.onclick = () => text.hidden = true
     button.append("X")
     form.append(button)
 
     text.append("no result found");
-    text.style.display = "none";
+    text.hidden = true;
     form.append(text);
 
     div.append(form);
