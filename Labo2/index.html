@@ -2,7 +2,10 @@
 <script>
     const div = document.getElementById("mySelect");
     const datalist = document.createElement("datalist");
+    const button = document.createElement("button");
+    const form = document.createElement("form");
     const input = document.createElement("input");
+    const text = document.createElement("text");
     const options = ["Chrome", "Firefox", "Internet Explorer", "Opera", "Safari", "Microsoft Edge"];
 
     datalist.id = "browsers";
@@ -11,8 +14,27 @@
         option.value = options[i];
         datalist.append(option);
     }
-    div.append(datalist);
+
+    form.append(datalist);
     input.setAttribute("list", datalist.id);
-    input.setAttribute("name", "toto");
-    div.append(input);
+    input.oninput = () => {
+        const filteredOptions = options.filter(el => (el.indexOf(input.value) !== -1))
+        if (filteredOptions.length === 0) {
+            text.style.display = ""
+        } else {
+            text.style.display = "none"
+        }
+    }
+    form.append(input)
+
+    button.type = "reset";
+    button.onclick = () => text.style.display = "none"
+    button.append("X")
+    form.append(button)
+
+    text.append("no result found");
+    text.style.display = "none";
+    form.append(text);
+
+    div.append(form);
 </script>
