@@ -6,6 +6,7 @@
     const form = document.createElement("form");
     const input = document.createElement("input");
     const text = document.createElement("text");
+    const br = document.createElement("br");
     const options = ["Chrome", "Firefox", "Internet Explorer", "Opera", "Safari", "Microsoft Edge"];
 
     datalist.id = "browsers";
@@ -37,7 +38,7 @@
     button.onclick = () => text.hidden = true
     button.append("X")
     form.append(button)
-
+    form.append(br);
     text.append("no result found");
     text.hidden = true;
     form.append(text);
