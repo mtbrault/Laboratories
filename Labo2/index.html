@@ -1,26 +1,30 @@
-<div id="mySelect"></div>
+<div id="mySelect">
+    <form>
+        <datalist id="datalist">
+            <option value="Chrome"></option>
+            <option value="Firefox"></option>
+            <option value="Internet Explorer"></option>
+            <option value="Opera"></option>
+            <option value="Safari"></option>
+            <option value="Microsoft Edge"></option>
+        </datalist>
+        <input id="input" list="datalist" placeholder="Select your browser">
+        <button id="button" onclick="onclick()" type="reset" hidden="true">X</button>
+        <br>
+        <text id="text" hidden="true">no result found</text>
+    </form>
+</div>
 <script>
-    const div = document.getElementById("mySelect");
-    const datalist = document.createElement("datalist");
-    const button = document.createElement("button");
-    const form = document.createElement("form");
-    const input = document.createElement("input");
-    const text = document.createElement("text");
-    const br = document.createElement("br");
-    const options = ["Chrome", "Firefox", "Internet Explorer", "Opera", "Safari", "Microsoft Edge"];
+    const text = document.getElementById("text");
+    const button = document.getElementById("button");
+    const input = document.getElementById("input");
+    const datalistOptions = [...document.getElementById("datalist").options];
+    const values = datalistOptions.map(({
+        value
+    }) => value);
 
-    datalist.id = "browsers";
-    for (var i = 0; i < options.length; i++) {
-        const option = document.createElement("option");
-        option.value = options[i];
-        datalist.append(option);
-    }
-
-    form.append(datalist);
-    input.setAttribute("list", datalist.id);
-    input.placeholder = "Select your browser";
     input.oninput = () => {
-        const filteredOptions = options.filter(el => (el.indexOf(input.value) !== -1))
+        const filteredOptions = values.filter(el => (el.indexOf(input.value) !== -1))
         if (filteredOptions.length === 0) {
             text.hidden = false
         } else {
@@ -32,17 +36,9 @@
             button.hidden = false;
         }
     }
-    form.append(input)
 
-    button.type = "reset";
-    button.hidden = true;
-    button.onclick = () => text.hidden = true
-    button.append("X")
-    form.append(button)
-    form.append(br);
-    text.append("no result found");
-    text.hidden = true;
-    form.append(text);
-
-    div.append(form);
+    button.onclick = () => {
+        text.hidden = true;
+        button.hidden = true;
+    }
 </script>
