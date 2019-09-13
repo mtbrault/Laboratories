@@ -1,44 +1,27 @@
-<div id="mySelect">
-    <form>
-        <datalist id="datalist">
-            <option value="Chrome"></option>
-            <option value="Firefox"></option>
-            <option value="Internet Explorer"></option>
-            <option value="Opera"></option>
-            <option value="Safari"></option>
-            <option value="Microsoft Edge"></option>
-        </datalist>
-        <input id="input" list="datalist" placeholder="Select your browser">
-        <button id="button" onclick="onclick()" type="reset" hidden="true">X</button>
-        <br>
-        <text id="text" hidden="true">no result found</text>
-    </form>
-</div>
-<script>
-    const text = document.getElementById("text");
-    const button = document.getElementById("button");
-    const input = document.getElementById("input");
-    const datalistOptions = [...document.getElementById("datalist").options];
-    const values = datalistOptions.map(({
-        value
-    }) => value);
-
-    input.oninput = () => {
-        const filteredOptions = values.filter(el => (el.indexOf(input.value) !== -1))
-        if (filteredOptions.length === 0) {
-            text.hidden = false
-        } else {
-            text.hidden = true
-        }
-        if (input.value === "") {
-            button.hidden = true;
-        } else {
-            button.hidden = false;
-        }
-    }
-
-    button.onclick = () => {
-        text.hidden = true;
-        button.hidden = true;
-    }
-</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>My datalist</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div id="mySelect">
+            <form>
+                <datalist id="datalist">
+                    <option value="Chrome"></option>
+                    <option value="Firefox"></option>
+                    <option value="Internet Explorer"></option>
+                    <option value="Opera"></option>
+                    <option value="Safari"></option>
+                    <option value="Microsoft Edge"></option>
+                </datalist>
+                <input id="input" list="datalist" placeholder="Select your browser">
+                <button id="button" type="reset" hidden="true">X</button>
+                <br>
+                <text id="text" hidden="true">no result found</text>
+            </form>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
