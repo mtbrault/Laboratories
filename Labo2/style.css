@@ -1,0 +1,8 @@
+#search {
+	width: 350px;
+}
+
+#search, #button-reset {
+	padding: 10px;
+	position: relative;
+}

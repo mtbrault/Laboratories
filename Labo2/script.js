@@ -1,6 +1,6 @@
 const text = document.getElementById("text");
-const button = document.getElementById("button");
-const input = document.getElementById("input");
+const button = document.getElementById("button-reset");
+const input = document.getElementById("search");
 const datalistOptions = [...document.getElementById("datalist").options];
 const values = datalistOptions.map(({ value }) => value);
 
