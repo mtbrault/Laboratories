@@ -1,30 +1,51 @@
-.submit-button {
-	width: 100px;
-	border: 3px solid black;
+#input-message {
+	width: 15%;
 	border-radius: 10px;
-	padding: 10;
+	padding: 7px;
+	border: 2px solid black;
+	font-weight: bold;
+	font-size: 15px;
 }
 
-#error-button {
-	background-color: red;
+.form-toaster {
+	margin: 0 auto;
+	text-align: center;
 }
 
-#warning-button {
-	background-color: yellow;
+.button-place, .toaster-list {
+	display: block;
+	margin-top: 20px;
 }
 
-#success-button {
-	background-color: green;
+#error-button, #warning-button, #success-button {
+	width: 100px;
+	font-size: 15px;
+	color: white;
+	border-radius: 10px;
+	border: none;
+	font-weight: bold;
 }
 
-.toast-error {
-	background-color: red;
+#error-button, .toast-error {
+	background-color: rgb(252, 54, 54);
 }
 
-.toast-info {
-	background-color: yellow;
+#warning-button, .toast-info {
+	background-color: hsl(41, 100%, 53%);
 }
 
-.toast-success {
-	background-color: green;
+#success-button, .toast-success {
+	background-color: rgba(156, 250, 24, 0.899);
+}
+
+.toast-error, .toast-info, .toast-success {
+	width: 15%;
+	margin: 0 auto;
+	padding: 5px;
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	margin-bottom: 5px;
 }
