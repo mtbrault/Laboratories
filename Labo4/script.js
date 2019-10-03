@@ -40,7 +40,7 @@ class ApiManager {
     addTask = async(value) => {
         if (value === "") {
             alert("Please task need at least 1 character");
-            return;
+            return ;
         }
         try {
             await axios.post(this.url + '/' + this.userId + '/tasks', {
@@ -67,6 +67,10 @@ class ApiManager {
 
     updateTask = async(id) => {
         const value = document.getElementById('input-' + id).value;
+        if (value === "") { 
+            alert("Task need at least 1 character");
+            return ;
+        }
         await axios.put(this.url + '/' + this.userId + '/tasks/' + id, {
             name: value,
         }, {
