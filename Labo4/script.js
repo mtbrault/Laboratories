@@ -52,18 +52,11 @@ class ApiManager {
 		this.table.innerHTML = "";
 		await axios.get(this.url + '/' + this.userId + '/tasks')
 		.then(response => {
-			let size = 0;
 			response.data.tasks.forEach((value, index) => {
-				this.table.innerHTML += "<tr><td>" + value.name + "</td><td class=\"update\"><button type=\"button\" class=\"btn btn-info\">Modifier</td><td class=\"delete\"><button id=\"" + index + "\" type=\"button\" class=\"btn btn-danger\">Supprimer</button></td></tr>";
-				size++;
+				//Ajouter la tâche dans le HTML avec un bouton Supprimer et un bouton Edit
+				//Link l'event onclick sur Supprimer qui appelle this.deleteTask(id);
+				//Link l'event onclick sur Modifier qui appelle this.updateTask(id, value);
 			});
-			for (var i = 0; i < size; i++) {
-				(function(j, func) {
-					document.getElementById(j).addEventListener('click', function() {
-						func(j);
-					});
-				}(i, this.deleteTask))
-			}
 		})
 		.catch(err => {
 			this.initToken();
