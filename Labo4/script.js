@@ -65,7 +65,8 @@ class ApiManager {
         this.loadTask();
     }
 
-    updateTask = async(id, value) => {
+    updateTask = async(id) => {
+        const value = document.getElementById('input-' + id).value;
         await axios.put(this.url + '/' + this.userId + '/tasks/' + id, {
             name: value,
         }, {
@@ -80,12 +81,12 @@ class ApiManager {
         try {
             this.table.innerHTML = "";
             const { data: { tasks } } = await axios.get(this.url + '/' + this.userId + '/tasks')
-            for (var x = 0; x < tasks.length; x++) {
-                this.table.innerHTML += "<tr><td>" + tasks[x].name + "</td><td class=\"update\"><button type=\"button\" class=\"btn btn-info\">Modifier</td><td class=\"delete\"><button id=\"" + x + "\" type=\"button\" class=\"btn btn-danger\">Supprimer</button></td></tr>";
-            };
+            for (var x = 0; x < tasks.length; x++)
+                this.table.innerHTML += "<tr><td><input type=\"text\" id=\"input-" + tasks[x].id + "\" class=\"form-control\" value=\"" + tasks[x].name + "\" /></td><td class=\"update\"><button type=\"button\" id=\"modif-" + x + "\" class=\"btn btn-info\">Modifier</td><td class=\"delete\"><button id=\"suppr-" + x + "\" type=\"button\" class=\"btn btn-danger\">Supprimer</button></td></tr>";
             for (var i = 0; i < tasks.length; i++) {
-                const id = tasks[i].id
-                document.getElementById(i).addEventListener('click', () => this.deleteTask(id));
+                const id = tasks[i].id;
+                document.getElementById('suppr-' + i).addEventListener('click', () => this.deleteTask(id));
+                document.getElementById('modif-' + i).addEventListener('click', () => this.updateTask(id));
             }
         } catch (e) {
             alert("Cannot get Task")
