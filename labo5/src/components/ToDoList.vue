@@ -69,7 +69,6 @@ export default {
 				alert("Task need at least 1 character");
 				return ;
 			}
-			console.log(this.taskName);
 			await axios.post(this.url + '/' + this.token + '/tasks', {
 				name: this.taskName,
 			}, {

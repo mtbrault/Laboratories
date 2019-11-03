@@ -5,3 +5,4 @@ Valerian HUYLEBROECK - 111 274 586
 Afin de lancer l'application, effectuez les commandes suivantes :
      - npm install
      - npm run serve
+     - aller sur localhost:8080 dans votre navigateur
