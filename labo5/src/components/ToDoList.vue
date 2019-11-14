@@ -38,7 +38,7 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			url: 'https://glo3102lab4.herokuapp.com',
+			url: 'http://localhost:8080',
 			token: '',
 			taskName: '',
 			taskList: []
