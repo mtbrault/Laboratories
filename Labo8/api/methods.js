@@ -1,6 +1,5 @@
 const express = require('express');
 const generateToken = require('uuid/v4');
-const Cookies = require('js-cookie');
 
 const router = express.Router();
 
@@ -22,25 +21,25 @@ router.post('/login', (req, res) => {
 
 	if (!username || ! password)
 		return res.sendStatus(400);
-	userList.forEach(elem => {
-		if (elem.username === username && elem.password === password) {
-			const token = generateToken();
-			elem.token = token;
-			res.cookie('token', token);
-			return res.status(200).send({token});
-		}
-	})
-	return res.sendStatus(401);
+	const user = userList.find(elem => {
+		return (elem.username === username && elem.password === password)
+	});
+	if (!user)
+		return res.sendStatus(401);
+	const token = generateToken();
+	user.token = token;
+	res.status(200).send({token});
 });
 
 router.get('/profile', (req, res) => {
-	const token = req.body.token;
+	const token = req.headers.token;
 
-	userList.forEach(elem => {
-		if (elem.token === token)
-			return res.send('Bienvenue sur ton profile ' + elem.username + ' !');
+	const user = userList.find(elem => {
+		return elem.token === token;
 	})
-	return res.status(401).send("Bad token");
+	if (!user)
+		return res.status(401).send("Bad token");
+	res.send('Bienvenue sur ton profile ' + user.username + ' !');
 });
 
 module.exports = router;

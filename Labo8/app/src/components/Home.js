@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -8,7 +8,13 @@ const Home = () => {
 	let history = useHistory();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [apiUrl, setUrl] = useState('http://localhost:8080');
+	const [apiUrl] = useState('http://localhost:8080');
+
+	useEffect(() => {
+	  const token = Cookies.get('token');
+	  if (token)
+		history.push('/userprofile');
+	}, [])
 
 	const createAccount = () => {
 		if (username === '' || password === '') {
@@ -30,8 +36,8 @@ const Home = () => {
 			username, password
 		})
 		.then(res => {
-			console.log(Cookies.get('token'));
-			//history.push('/userprofile')
+			Cookies.set('token', res.data.token);
+			history.push('/userprofile')
 		})
 		.catch(() => {
 			alert("Bad password or username");
