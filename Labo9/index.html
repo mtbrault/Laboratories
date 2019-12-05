@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <title>My amazing chat</title>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="auth">
+			<label for="nickname">Enter your nickname :</label>
+			<input type="text" id="nickname" />
+			<button id="submitNickname">Submit</button>
+		</div>
+		<div id="chat">
+			<ul id="messagesList"></ul>
+			<form action="" onsubmit="return false;">
+				<input id="mess" autocomplete="off" />
+				<button id="sendMessage">Send</button>
+			</form>
+		</div>
+	</body>
+</html>
