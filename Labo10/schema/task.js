@@ -2,17 +2,20 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema();
 
 schema.add({
-	value: String,
-	user: String,
+	name: String,
+    userId: String,
 });
 
-schema.methods.toDTO = () => {
-	const data = this.toObject();
-	return {
-		value: data.value,
-		user: data.id
-	}
+schema.methods.toDTO = function() {
+    const obj = this.toObject();
+
+    return {
+        id: obj._id,
+		name: obj.name,
+		userId: obj.userId
+    }
 }
+
 
 const task = mongoose.model('Task', schema);
 

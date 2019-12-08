@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const parser = require('body-parser');
 const methods = require('./methods');
+const CONFIG = require('./config');
+
 
 const CORS_OPTIONS = {
     origin: '*',
@@ -9,7 +11,7 @@ const CORS_OPTIONS = {
     credentials: true
 };
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || CONFIG.APP_PORT;
 const app = express();
 
 app.use(parser.json());
