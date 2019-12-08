@@ -1,0 +1,7 @@
+Matthieu BRAULT - 111 274 530
+Zakaria LAABID - 111 276 568
+Valerian HUYLEBROECK - 111 274 586
+
+Afin de lancer l'application, effectuez les commandes suivantes :
+     - npm install
+     - npm start
