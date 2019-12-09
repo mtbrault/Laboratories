@@ -19,16 +19,15 @@ const User = require('./schema/user.js').model;
 
 taskRouter = express.Router();
 
-
 myRouter.post('/users', async (req, res)  => {
     try {
         const user = new User();
         const result = await user.save()
       
         logger.info(result, "User successfully created");
-        return res.status(HTTP_CODE.CREATED).send(JSON.stringify(responseFormater(result)));
+        return res.status(HTTP_CODE.CREATED).send(JSON.stringify(result));
     } catch (error) {
-        logger.fatal(err, 'A fatal error occurred. Exiting.');
+        logger.fatal(error, 'A fatal error occurred. Exiting.');
         return res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
     }
 });
@@ -59,7 +58,6 @@ myRouter.get('/:userId/tasks', async (req, res) => {
 myRouter.post('/:userId/tasks', bodyParser.json(), jsonGuard, async (req, res) => {
     const userId = req.params.userId;
     const taskData = req.body;
-    console.log(taskData != '')
     try {
         const resultUser = await User.findById(userId);
         if (!resultUser) {
@@ -104,7 +102,7 @@ myRouter.put('/:userId/tasks/:taskId', async (req, res) => {
             logger.fatal("Error while updating task");
             return res.sendStatus(HTTP_CODE.SERVICE_UNAVAILABLE)
         }
-        return res.status(HTTP_CODE.OK).send(JSON.stringify(updatedTask));
+        return res.status(HTTP_CODE.OK).send(JSON.stringify(updatedTask.toDTO()));
     } catch (error) {
         logger.fatal(error, 'A fatal error occurred. Exiting.');
         return res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
@@ -125,7 +123,8 @@ myRouter.delete('/:userId/tasks/:taskId', async (req, res) => {
             logger.fatal("Task not found");
             return res.sendStatus(HTTP_CODE.NOT_FOUND)
         }
-        return res.status(HTTP_CODE.OK).send(JSON.stringify(resultRemove));
+        logger.info("Task : " +  taskId + " Successfuly deleted")
+        return res.sendStatus(HTTP_CODE.OK);
     } catch (error) {
         logger.fatal(error, 'A fatal error occurred. Exiting.');
         return res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
